@@ -57,7 +57,6 @@ class GameViewModel : ViewModel(){
             }
         }
     }
-
     private fun swap(a:Int, b:Int){
         val newBoard = board.value.toMutableList()
         val aux = newBoard[a]

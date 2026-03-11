@@ -1,5 +1,6 @@
 package com.ud.mysliderapp.ui.screen
 
+import android.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,9 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.ud.mysliderapp.ui.theme.BackgroundDark
-import com.ud.mysliderapp.ui.theme.TileColor
-import com.ud.mysliderapp.ui.theme.TileTextColor
+import com.ud.mysliderapp.ui.theme.*
 
 @Composable
 fun HomeScreen(viewModel: GameViewModel = viewModel()){
@@ -45,11 +44,13 @@ fun HomeScreen(viewModel: GameViewModel = viewModel()){
         verticalArrangement = Arrangement.Center
     ) {
         if(!gameStarted){
-
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(20.dp),
-                elevation = CardDefaults.cardElevation(8.dp)
+                elevation = CardDefaults.cardElevation(8.dp),
+                colors = CardDefaults.cardColors(
+                        containerColor = CardBackground
+                        )
             ) {
                 Column(
                     modifier = Modifier.padding(25.dp),
@@ -57,7 +58,8 @@ fun HomeScreen(viewModel: GameViewModel = viewModel()){
                 ) {
                     Text(
                         "Slide Puzzle",
-                        style = MaterialTheme.typography.headlineLarge
+                        style = MaterialTheme.typography.headlineLarge,
+                        color = TextPrimary
                     )
 
                     Spacer(modifier = Modifier.height(20.dp))
@@ -66,24 +68,29 @@ fun HomeScreen(viewModel: GameViewModel = viewModel()){
                                 "moviendo las piezas que esten continuas\n" +
                                 "hasta completar el puzzle. " +
                                 "\nTen en cuenta que NO se puede mover en Diagonal",
-                        style = MaterialTheme.typography.bodyLarge
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = TextSecondary
                     )
 
                     Spacer(modifier = Modifier.height(20.dp))
                     Text(
                         "Cómo jugar:\n" +
                                 "1. Selecciona una ficha\n" +
-                                "2. Selecciona una ficha continua \n" +
+                                "2. Selecciona dos ficha continua \n" +
                                 "(arriba, abajo, izquierda o derecha)\n" +
                                 "3. Intercambia posiciones",
-                        style = MaterialTheme.typography.bodyMedium
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = TextSecondary
                     )
 
                     Spacer(modifier = Modifier.height(30.dp))
                     Button(
                         onClick = { viewModel.newGame() }
                     ) {
-                        Text("Iniciar juego")
+                        Text(
+                            "Iniciar juego",
+                            color = PrimaryButton
+                        )
                     }
                 }
             }
@@ -92,7 +99,10 @@ fun HomeScreen(viewModel: GameViewModel = viewModel()){
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(20.dp),
-                elevation = CardDefaults.cardElevation(8.dp)
+                elevation = CardDefaults.cardElevation(8.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = CardBackground
+                )
             ) {
 
                 Column(
@@ -103,23 +113,33 @@ fun HomeScreen(viewModel: GameViewModel = viewModel()){
                     Text(
                         "Slide Puzzle",
                         style = MaterialTheme.typography.headlineMedium,
-                        color = TileColor
+                        color = TextPrimary
                     )
 
                     Spacer(modifier = Modifier.height(5.dp))
                     Text(
                         "\tSelecciona dos fichas continua para moverlas",
-                        style = MaterialTheme.typography.bodySmall
+                        style = MaterialTheme.typography.bodySmall,
+                        color = TextSecondary
                     )
 
                     Spacer(modifier = Modifier.height(10.dp))
-                    Text("Moves: $moves")
-                    Text("Time: $time s")
+                    Text(
+                        "Moves: $moves",
+                        color = TextSecondary
+                    )
+                    Text(
+                        "Time: $time s",
+                        color = TextSecondary
+                    )
                     Spacer(modifier = Modifier.height(15.dp))
                     Button(
-                        onClick = { viewModel.newGame() }
+                        onClick = { viewModel.newGame() },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = SecondaryButton
+                        )
                     ) {
-                        Text("Restart")
+                        Text("Restart",)
                     }
 
                     Spacer(modifier = Modifier.height(20.dp))
@@ -147,7 +167,7 @@ fun HomeScreen(viewModel: GameViewModel = viewModel()){
                                     colors = ButtonDefaults.buttonColors(
                                         containerColor =
                                             if(isSelected)
-                                                MaterialTheme.colorScheme.secondary
+                                                SelectedTile
                                             else
                                                 TileColor
                                     ),
