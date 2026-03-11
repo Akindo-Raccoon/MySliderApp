@@ -11,6 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.ud.mysliderapp.ui.screen.GameViewModel
+import com.ud.mysliderapp.ui.screen.HomeScreen
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ud.mysliderapp.ui.theme.MySliderAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,30 +21,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MySliderAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            val puzzleViewModel: GameViewModel = viewModel()
+            HomeScreen(puzzleViewModel)
+
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    MySliderAppTheme {
-        Greeting("Android")
-    }
+
 }

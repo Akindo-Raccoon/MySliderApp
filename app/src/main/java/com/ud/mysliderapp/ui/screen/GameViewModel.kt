@@ -1,10 +1,11 @@
-package com.ud.mysliderapp.ui
+package com.ud.mysliderapp.ui.screen
 
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.ud.mysliderapp.ui.core.Constants
+import kotlin.math.abs
 
 class GameViewModel : ViewModel(){
     val board = mutableStateOf(Constants.GAME_SOLVED.shuffled())
@@ -57,8 +58,8 @@ class GameViewModel : ViewModel(){
         val row2 = j / Constants.BOARD_SIZE
         val col2 = j % Constants.BOARD_SIZE
 
-        val sameRow = row1 == row2 && kotlin.math.abs(col1 - col2) == 1
-        val sameCol = col1 == col2 && kotlin.math.abs(row1 - row2) == 1
+        val sameRow = row1 == row2 && abs(col1 - col2) == 1
+        val sameCol = col1 == col2 && abs(row1 - row2) == 1
 
         return sameRow || sameCol
     }
