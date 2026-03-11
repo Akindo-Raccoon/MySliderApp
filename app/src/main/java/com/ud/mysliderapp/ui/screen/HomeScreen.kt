@@ -1,3 +1,8 @@
 package com.ud.mysliderapp.ui.screen
 
-q
+import androidx.compose.runtime.Composable
+
+@Composable
+fun HomeScreen(){
+
+}
