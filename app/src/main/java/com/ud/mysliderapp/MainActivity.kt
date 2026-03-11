@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.ud.mysliderapp.ui.screen.GameViewModel
 import com.ud.mysliderapp.ui.screen.HomeScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.ud.mysliderapp.ui.theme.MySliderAppTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

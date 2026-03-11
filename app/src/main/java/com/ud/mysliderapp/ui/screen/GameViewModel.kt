@@ -4,7 +4,10 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.ud.mysliderapp.ui.core.Constants
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 class GameViewModel : ViewModel(){
@@ -13,6 +16,13 @@ class GameViewModel : ViewModel(){
     val isSolved = mutableStateOf(false)
     val watch = mutableLongStateOf(0)
     val selectIndex = mutableStateOf<Int?>(null)
+    val gameStarted = mutableStateOf(false)
+    val timerRunning = mutableStateOf(false)
+
+    init {
+        gameStarted.value = false
+        startWatch()
+    }
 
     fun newGame(){
         board.value = Constants.GAME_SOLVED.shuffled()
@@ -20,6 +30,7 @@ class GameViewModel : ViewModel(){
         isSolved.value = false
         watch.longValue = 0
         selectIndex.value = null
+        startWatch()
     }
 
     fun isPuzzleSolved(): Boolean{
@@ -37,6 +48,11 @@ class GameViewModel : ViewModel(){
                 moves.intValue++
             }
             selectIndex.value = null
+
+            if(isPuzzleSolved()){
+                isSolved.value = true
+                stopWatch()
+            }
         }
     }
 
@@ -46,11 +62,8 @@ class GameViewModel : ViewModel(){
 
         newBoard[a] = newBoard[b]
         newBoard[b] = aux
-
         board.value = newBoard
-
     }
-
     private fun isAdjacent(i:Int,j:Int): Boolean{
         val row1 = i / Constants.BOARD_SIZE
         val col1 = i % Constants.BOARD_SIZE
@@ -65,7 +78,17 @@ class GameViewModel : ViewModel(){
     }
 
     fun startWatch(){
+        timerRunning.value = true
+        viewModelScope.launch {
+            while(timerRunning.value){
+                delay(1000)
+                watch.longValue++
+            }
+        }
+    }
 
+    fun stopWatch(){
+        timerRunning.value = false
     }
 
 
