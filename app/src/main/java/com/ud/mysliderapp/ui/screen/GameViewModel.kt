@@ -30,6 +30,8 @@ class GameViewModel : ViewModel(){
         isSolved.value = false
         watch.longValue = 0
         selectIndex.value = null
+
+        gameStarted.value = true
         startWatch()
     }
 

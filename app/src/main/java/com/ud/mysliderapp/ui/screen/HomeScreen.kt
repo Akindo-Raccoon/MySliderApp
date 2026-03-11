@@ -21,12 +21,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ud.mysliderapp.ui.theme.BackgroundDark
 import com.ud.mysliderapp.ui.theme.TileColor
 import com.ud.mysliderapp.ui.theme.TileTextColor
 
 @Composable
-fun HomeScreen(viewModel: GameViewModel){
+fun HomeScreen(viewModel: GameViewModel = viewModel()){
 
     val board = viewModel.board.value
     val moves = viewModel.moves.intValue
